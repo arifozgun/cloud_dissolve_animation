@@ -1,6 +1,6 @@
 name: cloud_dissolve_animation
 description: A dreamy cloud-like dissolve animation widget for Flutter. Creates beautiful blur, float, and fade effects using Overlay for unbounded animations.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/arifozgun/cloud_dissolve_animation
 repository: https://github.com/arifozgun/cloud_dissolve_animation
 issue_tracker: https://github.com/arifozgun/cloud_dissolve_animation/issues
