@@ -1,0 +1,18 @@
+name: cloud_dissolve_animation_example
+description: Example app for the cloud_dissolve_animation package.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cloud_dissolve_animation:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true

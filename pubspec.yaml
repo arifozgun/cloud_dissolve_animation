@@ -1,0 +1,19 @@
+name: cloud_dissolve_animation
+description: A dreamy cloud-like dissolve animation widget for Flutter. Creates beautiful blur, float, and fade effects using Overlay for unbounded animations.
+version: 0.0.1
+homepage: https://github.com/speakblend/cloud_dissolve_animation
+repository: https://github.com/speakblend/cloud_dissolve_animation
+issue_tracker: https://github.com/speakblend/cloud_dissolve_animation/issues
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
