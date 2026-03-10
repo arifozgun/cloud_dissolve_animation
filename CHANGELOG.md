@@ -1,3 +1,7 @@
+## 0.0.2
+
+* Fixed repository and homepage links in pubspec.yaml pointing to wrong GitHub username.
+
 ## 0.0.1
 
 * Initial release
