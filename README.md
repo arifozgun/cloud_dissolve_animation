@@ -2,6 +2,8 @@
 
 A dreamy cloud-like dissolve animation widget for Flutter. Creates beautiful blur, float, scale, and fade-out effects — perfect for deletion animations in lists, messages, or any widget.
 
+![Cloud Dissolve Animation](https://github.com/user-attachments/assets/c955a777-8590-4b1b-887d-05e095fbb837)
+
 ## ✨ Features
 
 - **Cloud-like blur spreading** — Progressive gaussian blur with high sigma
