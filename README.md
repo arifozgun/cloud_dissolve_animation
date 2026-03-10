@@ -1,46 +1,49 @@
 # Cloud Dissolve Animation
 
-A dreamy cloud-like dissolve animation widget for Flutter. Creates beautiful blur, float, scale, and fade-out effects — perfect for deletion animations in lists, messages, or any widget.
+A refined, cloud-like dissolve animation widget for Flutter applications. This package provides smooth blur, float, scale, and fade-out effects, designed specifically for elegant deletion animations in lists, complex UI components, or any standard widget.
 
 ![Cloud Dissolve Animation](https://github.com/user-attachments/assets/c955a777-8590-4b1b-887d-05e095fbb837)
 
-## ✨ Features
+## Features
 
-- **Cloud-like blur spreading** — Progressive gaussian blur with high sigma
-- **Float upward** — Widget gently floats up during dissolution
-- **Scale expansion** — Slight outward expansion for a spreading cloud effect
-- **Smooth fade-out** — Elegant opacity transition
-- **Size collapse** — Original space smoothly closes (ideal for lists)
-- **Overlay-based rendering** — Animation renders at the top layer, allowing blur to spread freely beyond widget bounds
-- **Configurable** — Duration, curve, and shrink behavior
-- **Ready-to-use wrapper** — `DeletableItemWrapper` for easy list item deletion
+- **Progressive Blur**: Applies high-sigma Gaussian blur that smoothly spreads out.
+- **Float and Scale**: Gently lifts and expands the widget during dissolution.
+- **Smooth Opacity Transition**: Ensures a clean fade-out effect.
+- **Auto-Collapse**: Automatically closes the freed space, ideal for dynamic list structures.
+- **Overlay Rendering**: Renders at the top layer, allowing effects to safely exceed widget boundaries.
+- **Highly Configurable**: Control duration, animation curves, and spatial behaviors.
+- **Ready-to-use Wrappers**: Includes `DeletableItemWrapper` for boilerplate-free implementation in lists.
 
-## 📦 Installation
+## Installation
 
-Add to your `pubspec.yaml`:
+Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   cloud_dissolve_animation: ^0.0.1
 ```
 
-## 🚀 Usage
+## Usage
 
-### Basic Usage
+### Basic Implementation
+
+Wrap any widget in a `CloudDissolveAnimation` to trigger the effect immediately upon rendering or as part of a state change.
 
 ```dart
 import 'package:cloud_dissolve_animation/cloud_dissolve_animation.dart';
 
 CloudDissolveAnimation(
   onComplete: () {
-    // Remove item from data source
+    // Handle the removal of the item from your data source
     setState(() => items.removeAt(index));
   },
   child: MyWidget(),
 )
 ```
 
-### With DeletableItemWrapper (Recommended for Lists)
+### Implementing in Lists (Recommended)
+
+For `ListView` or similar dynamic sequences, use the provided `DeletableItemWrapper` to handle state and animation synchronization automatically.
 
 ```dart
 import 'package:cloud_dissolve_animation/cloud_dissolve_animation.dart';
@@ -48,18 +51,20 @@ import 'package:cloud_dissolve_animation/cloud_dissolve_animation.dart';
 ListView.builder(
   itemCount: items.length,
   itemBuilder: (context, index) {
+    final item = items[index];
+
     return DeletableItemWrapper(
-      key: ValueKey(items[index].id),
-      isDeleting: items[index].isDeleting,
+      key: ValueKey(item.id),
+      isDeleting: item.isDeleting,
       onDeleteComplete: () {
-        setState(() => items.removeWhere((i) => i.id == items[index].id));
+        setState(() => items.removeWhere((i) => i.id == item.id));
       },
       child: ListTile(
-        title: Text(items[index].title),
+        title: Text(item.title),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: () {
-            setState(() => items[index].isDeleting = true);
+            setState(() => item.isDeleting = true);
           },
         ),
       ),
@@ -68,56 +73,56 @@ ListView.builder(
 )
 ```
 
-### Without Size Collapse
+### Disabling Size Collapse
 
-If you're using the animation in a fixed-size container (not a list), disable the shrink:
+If the animation occurs within a fixed-size container (not part of a dynamically sizing list), you can disable the shrink behavior to prevent the layout from shifting natively.
 
 ```dart
 CloudDissolveAnimation(
-  shrinkSize: false, // Don't collapse the space
-  duration: Duration(milliseconds: 800),
-  onComplete: () => print('Dissolved!'),
+  shrinkSize: false,
+  duration: const Duration(milliseconds: 800),
+  onComplete: () => debugPrint('Dissolved!'),
   child: MyFixedWidget(),
 )
 ```
 
-## ⚙️ Configuration
+## Configuration
 
-### CloudDissolveAnimation
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `child` | `Widget` | Required | The widget to dissolve |
-| `onComplete` | `VoidCallback?` | `null` | Called when animation completes |
-| `duration` | `Duration` | `500ms` | Total animation duration |
-| `curve` | `Curve` | `easeOutCubic` | Animation curve |
-| `shrinkSize` | `bool` | `true` | Whether to collapse the widget's space |
-
-### DeletableItemWrapper
+### CloudDissolveAnimation Properties
 
 | Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `child` | `Widget` | Required | The widget to wrap |
-| `isDeleting` | `bool` | `false` | Set to `true` to start dissolving |
-| `onDeleteComplete` | `VoidCallback?` | `null` | Called when animation completes |
+|---|---|---|---|
+| `child` | `Widget` | Required | The target widget to dissolve. |
+| `onComplete` | `VoidCallback?` | `null` | Callback executed after the animation sequence finishes. |
+| `duration` | `Duration` | `500ms` | The total length of the animation. |
+| `curve` | `Curve` | `easeOutCubic` | The animation curve for pacing. |
+| `shrinkSize` | `bool` | `true` | Dictates whether the container collapses its boundaries post-animation. |
 
-## 🎬 Animation Breakdown
+### DeletableItemWrapper Properties
 
-The dissolve effect combines 5 synchronized animations:
+| Property | Type | Default | Description |
+|---|---|---|---|
+| `child` | `Widget` | Required | The target widget to monitor or wrap. |
+| `isDeleting` | `bool` | `false` | A state flag. Setting this to `true` initiates the dissolve animation. |
+| `onDeleteComplete` | `VoidCallback?` | `null` | Callback executed after the dissolve effectively concludes. |
 
-| Effect | Range | Timing | Description |
-|--------|-------|--------|-------------|
-| **Blur** | 0 → 30 sigma | 0% – 80% | Progressive gaussian blur |
-| **Opacity** | 1.0 → 0.0 | 15% – 100% | Smooth fade out |
-| **Scale** | 1.0 → 1.15 | 0% – 70% | Slight outward expansion |
-| **Float** | 0 → -30px | 0% – 80% | Upward movement |
-| **Size** | 1.0 → 0.0 | 20% – 100% | Space collapse |
+## Animation Breakdown
 
-## 📋 Requirements
+The dissolve effect synchronously orchestrates five distinct visual transitions:
 
-- Flutter 3.10+
-- Dart 3.0+
+| Visual Effect | Value Range | Temporal Range | Description |
+|---|---|---|---|
+| **Blur** | 0 to 30 sigma | 0% – 80% | Progressive Gaussian blur spread. |
+| **Float** | 0 to -30px | 0% – 80% | Upward vertical translation. |
+| **Scale** | 1.0 to 1.15 | 0% – 70% | Slight outward radial expansion. |
+| **Opacity** | 1.0 to 0.0 | 15% – 100% | Linear fade to full transparency. |
+| **Size** | 1.0 to 0.0 | 20% – 100% | Structural space collapse (if enabled). |
 
-## 📄 License
+## Requirements
 
-MIT License — see [LICENSE](LICENSE) for details.
+- Flutter SDK: `3.10` or higher
+- Dart SDK: `3.0` or higher
+
+## License
+
+This project is licensed under the MIT License. Reference [LICENSE](LICENSE) for exact terms.
