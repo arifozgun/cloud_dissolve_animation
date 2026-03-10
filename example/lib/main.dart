@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Cloud Dissolve Example',
       theme: ThemeData.dark(),
       home: const CloudDissolveExample(),
