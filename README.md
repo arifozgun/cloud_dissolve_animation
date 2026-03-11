@@ -2,7 +2,8 @@
 
 A refined, cloud-like dissolve animation widget for Flutter applications. This package provides smooth blur, float, scale, and fade-out effects, designed specifically for elegant deletion animations in lists, complex UI components, or any standard widget.
 
-![Cloud Dissolve Animation](https://github.com/user-attachments/assets/c955a777-8590-4b1b-887d-05e095fbb837)
+![Cloud Dissolve Animation Demo](https://github.com/user-attachments/assets/268e8388-3f00-4778-bcc0-e2b4428c0631)
+
 
 ## Features
 
