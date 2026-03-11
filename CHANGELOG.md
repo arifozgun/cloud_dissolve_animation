@@ -1,10 +1,14 @@
+## 0.0.4
+
+* Edited README.md
+
 ## 0.0.3
 
-* Edited README.md.
+* Edited README.md
 
 ## 0.0.2
 
-* Fixed repository and homepage links in pubspec.yaml pointing to wrong GitHub username.
+* Fixed repository and homepage links in pubspec.yaml pointing to wrong GitHub username
 
 ## 0.0.1
 

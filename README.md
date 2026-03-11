@@ -20,7 +20,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  cloud_dissolve_animation: ^0.0.1
+  cloud_dissolve_animation: ^<latest_version>
 ```
 
 ## Usage
