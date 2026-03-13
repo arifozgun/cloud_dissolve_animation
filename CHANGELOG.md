@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Added logo to pubspec.yaml
+
 ## 0.0.4
 
 * Edited README.md
